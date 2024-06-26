@@ -9,6 +9,10 @@ const FileModel = sequelize.define('file', {
         allowNull: false,
         primaryKey: true
     },
+    userId:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     filepath: {
         type: DataTypes.STRING,
         allowNull: false
