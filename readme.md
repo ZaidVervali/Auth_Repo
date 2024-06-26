@@ -18,3 +18,11 @@ Ref : https://github.com/ZaidVervali/Redux
 
   2. ORM - Sequelize
   3. MySQL DB
+
+--
+
+### Day-3 at Vervali
+
+#### Task-1 : Write a code using Nodejs to upload file from user store in a local folder and store the file path inside database
+
+- task is done with 3 different routes : uploadFile(to upload single file) , uploadMulFile(to upload multiple files) , getAllFiles(to get the stored file details) , delFiel(to delete file on the basis of id)
