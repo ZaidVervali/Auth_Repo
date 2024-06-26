@@ -1,10 +1,11 @@
 
 const express = require("express");
-const { getAllFiles , upload , uploadFile ,uploadMulFiles } = require("../controller/fileController.js");
+const { getAllFiles , upload , uploadFile ,uploadMulFiles, deleteFile } = require("../controller/fileController.js");
 const router = express.Router();
 
 
 router.get('/getAllFiles', getAllFiles);
+router.delete('/delete/:id', deleteFile);
 
 // Route to upload a file
 router.post('/upload', upload.single('file'), uploadFile);

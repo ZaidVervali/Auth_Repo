@@ -2,6 +2,8 @@ const File = require("../models/file.model"); // Ensure the path is correct to y
 const multer = require("multer");
 const path = require("path");
 
+const fs = require('fs');
+
 // Set up multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -55,9 +57,37 @@ const uploadMulFiles = async (req, res) => {
   }
 };
 
+
+const deleteFile = async (req, res) => {
+    try {
+        const fileId = req.params.id;
+        const file = await File.findByPk(fileId);
+
+        if (!file) {
+            return res.status(404).json({ message: 'File not found' });
+        }
+
+        // Delete the file from the filesystem
+        fs.unlink(file.filepath, async (err) => {
+            if (err) {
+                console.error('Error deleting file:', err);
+                return res.status(500).json({ message: 'Error deleting file' });
+            }
+
+            // Delete the file record from the database
+            await File.destroy({ where: { id: fileId } });
+
+            res.status(200).json({ message: 'File deleted successfully' });
+        });
+    } catch (error) {
+        console.error('Error deleting file:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 module.exports = {
   getAllFiles,
   upload,
   uploadFile,
   uploadMulFiles,
+  deleteFile
 };
