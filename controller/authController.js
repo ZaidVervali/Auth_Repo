@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const Auth = require('../models/auth.model'); // Ensure the path is correct to your 'auth' model
 
-// Function to register a new user
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
     
